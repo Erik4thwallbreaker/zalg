@@ -110,19 +110,14 @@ class Unipolynomial:
 		
 		
 	def __mul__(self, other):
-		prod = self.cetable														#SPM: Is this okay?
+		prod = self.cetable	
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
 		order = self.getOrder() + len(right)
 		prod = [0] * order
-		#print("p: ", left) #DEBUG
-		#print("q: ", right) #DEBUG
-		#print("Empty table: ", prod.cetable) #DEBUG
 		for i in range(len(left)):
 			for j in range(len(right)):
-				#print("(i,j) is: ", (i,j)) #DEBUG
-				#print("pi:", left[i], " qj:", right[j], "   p*q=", left[i] * right[j]) #DEBUG
 				prod[i+j] += left[i] * right[j]
 		return Unipolynomial(indeterm = self.indeterm, aux = prod)
 		
