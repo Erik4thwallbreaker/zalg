@@ -99,24 +99,23 @@ class Unipolynomial:
 		return len(self.cetable) - 1
 	
 	def __add__(self, other):
-		sum = self															#SPM: Is this okay?
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
 		overlap_length = min(len(left), len(right))
-		sum.cetable = [left[i] + right[i] for i in range(0, overlap_length)]
-		sum.cetable += [left[i] for i in range(overlap_length, len(left))]
-		sum.cetable += [right[i] for i in range(overlap_length, len(right))]
-		return sum
+		sum = [left[i] + right[i] for i in range(0, overlap_length)]
+		sum += [left[i] for i in range(overlap_length, len(left))]
+		sum += [right[i] for i in range(overlap_length, len(right))]
+		return Unipolynomial(indeterm = self.indeterm, aux = sum)
 		
 		
 	def __mul__(self, other):
-		prod = self 														#SPM: Is this okay?
+		prod = self.cetable														#SPM: Is this okay?
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
 		order = self.getOrder() + len(right)
-		prod.cetable = [0] * order
+		prod = [0] * order
 		#print("p: ", left) #DEBUG
 		#print("q: ", right) #DEBUG
 		#print("Empty table: ", prod.cetable) #DEBUG
@@ -124,8 +123,8 @@ class Unipolynomial:
 			for j in range(len(right)):
 				#print("(i,j) is: ", (i,j)) #DEBUG
 				#print("pi:", left[i], " qj:", right[j], "   p*q=", left[i] * right[j]) #DEBUG
-				prod.cetable[i+j] += left[i] * right[j]
-		return prod
+				prod[i+j] += left[i] * right[j]
+		return Unipolynomial(indeterm = self.indeterm, aux = prod)
 		
 #	def __truediv__(self, other):									
 #		TODO
