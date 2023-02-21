@@ -115,6 +115,8 @@ class Unipolynomial:
 		sum += [right[i] for i in range(overlap_length, len(right))]
 		return Unipolynomial(indeterm = self.indeterm, aux = sum)
 		
+	def __radd__(self, other):
+		return self + other	
 		
 	def __mul__(self, other):
 		prod = self.cetable	
@@ -127,6 +129,9 @@ class Unipolynomial:
 			for j in range(len(right)):
 				prod[i+j] += left[i] * right[j]
 		return Unipolynomial(indeterm = self.indeterm, aux = prod)
+		
+	def __rmul__(self, other):
+		return self * other
 		
 #	def __truediv__(self, other):									
 #		TODO
