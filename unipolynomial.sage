@@ -76,7 +76,7 @@ class Unipolynomial:
 		return cetable
 	
 	
-	def __init__(self, expression = "", indeterm = "", aux = []):	#Expressions can only be made of characters: numbers, [indeterminate], "+", "^", and " ".
+	def __init__(self, expression = "", indeterm = "x", aux = []):	#Expressions can only be made of characters: numbers, [indeterminate], "+", "^", and " ".
 	
 		if expression == "":										#Special rule to construct by arrays											
 			self.cetable = aux
