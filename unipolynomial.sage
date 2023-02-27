@@ -148,24 +148,23 @@ class Unipolynomial:
 			subtrahend = [right[j] * quot[i] for j in range(r)]				#Don't need to subtract from the highest term. It will not be used again.			
 			for j in range(r): left[i+j] -= subtrahend[j]
 		remainder = [left[i] for i in range(r)]
-		return [quot, remainder]
+		return {"quotient": quot, "remainder": remainder}
 		
 	def __truediv__(self, other):		
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
-		quotient = Unipolynomial.doubleValDiv(left, right)
-		remainder = quotient[1]
-		if not all([i == 0 for i in remainder]):
-			print("Division doesn't terminate. Remainder:", Unipolynomial.expressPolynomial(remainder, self.indeterm))
-		return Unipolynomial(indeterm = self.indeterm, aux = quotient[0])
+		result = Unipolynomial.doubleValDiv(left, right)
+		if not all([i == 0 for i in result["remainder"]]):
+			print("Division doesn't terminate. Remainder:", Unipolynomial.expressPolynomial(result["remainder"], self.indeterm))
+		return Unipolynomial(indeterm = self.indeterm, aux = result["quotient"])
 	
 	def __floordiv__(self, other):											
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
-		quotient = Unipolynomial.doubleValDiv(left, right)
-		return Unipolynomial(indeterm = self.indeterm, aux = quotient[0])
+		result = Unipolynomial.doubleValDiv(left, right)
+		return Unipolynomial(indeterm = self.indeterm, aux = result["quotient"])
 	
 #	def __pow__(self, other):
 #		TODO: will add a thing with fastexp
