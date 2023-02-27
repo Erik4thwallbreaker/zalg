@@ -86,21 +86,27 @@ class Unipolynomial:
 			self.indeterm = "x"
 		else:
 			self.indeterm = indeterm
-		
-	def __str__(self):
 	
-		display_pol = ""
-		order = len(self.cetable) - 1
-		for i in range(order, -1, -1):
-			if i < order and self.cetable[i] > 0: display_pol += " + "
-			elif i < order and self.cetable[i] < 0: display_pol += " - "
-			elif self.cetable[i] < 0: display_pol += "-"
-			if self.cetable[i] != 0:
-				if i == 0 or abs(self.cetable[i]) != 1: display_pol += str(abs(self.cetable[i]))
-				if i > 0 and abs(self.cetable[i]) != 1: display_pol += "*"
-				if i > 0: display_pol += self.indeterm
-				if i > 1: display_pol += "^" + str(i)
-		return(display_pol)
+	@staticmethod
+	def expressPolynomial(coeffecients, indeterm = "x"):	#Helping method, to write polynomial as a string from coeffecient table
+		if all([i == 0 for i in coeffecients]):
+			return "0"
+		else:
+			display_pol = ""
+			order = len(coeffecients) - 1
+			for i in range(order, -1, -1):
+				if i < order and coeffecients[i] > 0: display_pol += " + "
+				elif i < order and coeffecients[i] < 0: display_pol += " - "
+				elif coeffecients[i] < 0: display_pol += "-"
+				if coeffecients[i] != 0:
+					if i == 0 or abs(coeffecients[i]) != 1: display_pol += str(abs(coeffecients[i]))
+					if i > 0 and abs(coeffecients[i]) != 1: display_pol += "*"
+					if i > 0: display_pol += indeterm
+					if i > 1: display_pol += "^" + str(i)
+			return display_pol
+	
+	def __str__(self):
+		return Unipolynomial.expressPolynomial(self.cetable, self.indeterm)
 		
 	def getOrder(self):												#Get the order of a polynomial (class object).
 		return len(self.cetable) - 1
