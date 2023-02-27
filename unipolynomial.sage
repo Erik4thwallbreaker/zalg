@@ -131,9 +131,35 @@ class Unipolynomial:
 		
 	def __rmul__(self, other):
 		return self * other
+	
+	@staticmethod
+	def doubleValDiv(left, right):				#Helping function that picks out both the floordiv, and the remainder. Assuming both inputs to be non-empty lists.
+		r = len(right) - 1													#Order of the right polynomial. Handier to write like this.
+		order = len(left) - r - 1										#Actual order of resulting polynomial.
+		quot = [0] * (order + 1)
+		for i in range(order, -1, -1):
+			quot[i] = left[i+r] / right[r]
+			subtrahend = [right[j] * quot[i] for j in range(r)]				#Don't need to subtract from the highest term. It will not be used again.			
+			for j in range(r): left[i+j] -= subtrahend[j]
+		remainder = [left[i] for i in range(r)]
+		return [quot, remainder]
 		
-#	def __truediv__(self, other):									
-#		TODO
+	def __truediv__(self, other):		
+		left = self.cetable
+		if isinstance(other, Unipolynomial): right = other.cetable
+		else: right = [other]
+		quotient = Unipolynomial.doubleValDiv(left, right)
+		remainder = quotient[1]
+		if not all([i == 0 for i in remainder]):
+			print("Division doesn't terminate. Remainder:", remainder)
+		return Unipolynomial(indeterm = self.indeterm, aux = quotient[0])
+	
+	def __floordiv__(self, other):											
+		left = self.cetable
+		if isinstance(other, Unipolynomial): right = other.cetable
+		else: right = [other]
+		quotient = Unipolynomial.doubleValDiv(left, right)
+		return Unipolynomial(indeterm = self.indeterm, aux = quotient[0])
 	
 #	def __pow__(self, other):
 #		TODO: will add a thing with fastexp
