@@ -119,7 +119,6 @@ class Unipolynomial:
 		return self + other	
 		
 	def __mul__(self, other):
-		prod = self.cetable	
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
 		else: right = [other]
