@@ -157,7 +157,7 @@ class Unipolynomial:
 		quotient = Unipolynomial.doubleValDiv(left, right)
 		remainder = quotient[1]
 		if not all([i == 0 for i in remainder]):
-			print("Division doesn't terminate. Remainder:", remainder)
+			print("Division doesn't terminate. Remainder:", Unipolynomial.expressPolynomial(remainder, self.indeterm))
 		return Unipolynomial(indeterm = self.indeterm, aux = quotient[0])
 	
 	def __floordiv__(self, other):											
