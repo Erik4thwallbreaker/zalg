@@ -32,6 +32,9 @@ class Zelement:
 	def __add__(self, other):
 		sum_value = (other + self.value) % self.getCharacteristic()
 		return Zelement(sum_value, self.field)
+	
+	def __radd__(self, other):
+		return self + other
 		
 	def __sub__(self, other):
 		sum_value = (other - self.value) % self.getCharacteristic()
