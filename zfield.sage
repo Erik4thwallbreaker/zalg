@@ -48,6 +48,9 @@ class Zelement:
 		prod_value = (other * self.value) % self.getCharacteristic()
 		return Zelement(prod_value, self.field)
 		
+	def __rmul__(self, other):
+		return self * other
+		
 	def __truediv__(self, other):													#NB: STUPID!!!!  Making stupid operator first. Can exchange for euclids algortihm later
 		quot_value = 1
 		for i in range(self.getCharacteristic()):
