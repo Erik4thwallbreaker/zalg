@@ -1,2 +1,5 @@
 # Will ignore the specific folder /obsolete/
 /obsolete/
+
+# Will ignore scribble code and test code
+/scribbles.sage
