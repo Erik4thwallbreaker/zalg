@@ -37,8 +37,8 @@ class Zelement:
 		return self + other
 		
 	def __sub__(self, other):
-		sum_value = (other - self.value) % self.getCharacteristic()
-		return Zelement(sum_value, self.field)
+		diff_value = (other - self.value) % self.getCharacteristic()
+		return Zelement(diff_value, self.field)
 		
 	def __rsub__(self, other):
 		diff_value = (other - self.value) % self.getCharacteristic()
