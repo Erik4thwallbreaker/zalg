@@ -26,6 +26,12 @@ class Zelement:
 	def __str__(self):
 		return str(self.value)
 	
+	def __eq__(self, other):
+		if isinstance(other, Zelement):
+			return self.field == other.field and self.value == other.value
+		else:
+			return other % self.getCharacteristic() == self.value
+	
 	def __mod__(self, other): #Helping operator so that can be used in later
 		return self.value % other
 		
