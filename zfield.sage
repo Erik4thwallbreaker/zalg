@@ -14,7 +14,8 @@ class Zfield:
 		
 	def list_elements(self):
 		print(self)
-	
+
+#Class for the elements of such fields
 class Zelement:
 	def __init__(self, value, field):
 		self.value = value
@@ -31,7 +32,21 @@ class Zelement:
 			return self.field == other.field and self.value == other.value
 		else:
 			return other % self.getCharacteristic() == self.value
-	
+
+	def __gt__(self, other):
+		if isinstance(other, Zelement):
+			return self.field != other.field or self.value != other.value
+		else:
+			return self.value > other
+	def __ge__(self, other):
+		return isinstance(other, Zelement) or other % self.getCharacteristic() == self.value
+
+	def __ne__(self, other):
+		if isinstance(other, Zelement):
+			return self.field != other.field or self.value != other.value
+		else:
+			return self.value != other % self.getCharacteristic()
+
 	def __mod__(self, other): #Helping operator so that can be used in later
 		return self.value % other
 		
