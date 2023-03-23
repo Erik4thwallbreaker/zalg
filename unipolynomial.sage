@@ -88,7 +88,7 @@ class Unipolynomial:
 			self.indeterm = indeterm
 	
 	@staticmethod
-	def expressPolynomial(coeffecients, indeterm = "x"):	#Helping method, to write polynomial as a string from coeffecient table
+	def expressPolynomial(coeffecients, indeterm = "x"):             	#Helping method, to write polynomial as a string from coeffecient table
 		if all([i == 0 for i in coeffecients]):
 			return "0"
 		else:
