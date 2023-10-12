@@ -111,6 +111,9 @@ class Unipolynomial:
 	def getOrder(self):												#Get the order of a polynomial (class object).
 		return len(self.cetable) - 1
 	
+	def __eq__(self, other):
+		return self.cetable == other.cetable and self.indeterm == other.indeterm
+	
 	def __add__(self, other):
 		left = self.cetable
 		if isinstance(other, Unipolynomial): right = other.cetable
@@ -166,5 +169,13 @@ class Unipolynomial:
 		result = Unipolynomial.doubleValDiv(left, right)
 		return Unipolynomial(indeterm = self.indeterm, aux = result["quotient"])
 	
-#	def __pow__(self, other):
-#		TODO: will add a thing with fastexp
+	def __pow__(self, other):
+		result = 1
+		nsquared = self
+		for b in reversed(format(other, 'b')):
+			if int(b):
+				result = result * nsquared
+			nsquared = nsquared * nsquared
+		return result
+				
+				
