@@ -3,3 +3,6 @@
 
 # Will ignore scribble code and test code
 /scribbles.sage
+
+.DS_Store
+__pycache__
