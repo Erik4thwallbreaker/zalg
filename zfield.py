@@ -38,6 +38,7 @@ class Zelement:
 			return self.field != other.field or self.value != other.value
 		else:
 			return self.value > other
+		
 	def __ge__(self, other):
 		if isinstance(other, Zelement):
 			return True
