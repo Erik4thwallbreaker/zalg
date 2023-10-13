@@ -39,7 +39,10 @@ class Zelement:
 		else:
 			return self.value > other
 	def __ge__(self, other):
-		return isinstance(other, Zelement) or other % self.getCharacteristic() == self.value
+		if isinstance(other, Zelement):
+			return True
+		else:
+			return self.value >= other 
 
 	def __ne__(self, other):
 		if isinstance(other, Zelement):
