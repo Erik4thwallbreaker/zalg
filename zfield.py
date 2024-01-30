@@ -83,7 +83,11 @@ class Zelement:
 				quot_value = i
 		return Zelement(quot_value, self.field)
 	
-	def __pow__(self, other):														#Should also be changed for fastexponentiation / Do it with regular modding
-		pow_value = (self.value ** other) % self.getCharacteristic()
-		return Zelement(pow_value, self.field)
-		
+	def __pow__(self, other):
+		result = 1
+		nsquared = self
+		for b in reversed(format(other, 'b')):
+			if int(b):
+				result = result * nsquared
+			nsquared = nsquared * nsquared
+		return result
