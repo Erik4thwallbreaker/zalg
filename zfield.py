@@ -3,6 +3,17 @@ class Zfield:
 	def __init__(self, characteristic):
 		self.characteristic = characteristic
 
+	def __iter__(self):
+		self.counter = 0
+		return self
+
+	def __next__(self):
+		if self.counter >= self.characteristic:
+			raise StopIteration
+		t = self.counter
+		self.counter += 1
+		return t
+
 	def __str__(self):
 		group_displaying = "{"
 		for i in range(self.characteristic):
