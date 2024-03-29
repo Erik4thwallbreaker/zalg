@@ -17,7 +17,7 @@ class Zfield:
 	def __str__(self):
 		group_displaying = "{"
 		for i in range(self.characteristic):
-			group_displaying += f"{i}"
+			group_displaying += str(i)
 			if i < self.characteristic - 1:
 				group_displaying += ", "
 		group_displaying += "}"
