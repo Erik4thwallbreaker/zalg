@@ -9,3 +9,7 @@ __pycache__
 
 #Will ignore vim swap files
 *.swp
+
+#Will ignore Sessions
+Session.vim
+
