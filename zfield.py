@@ -1,5 +1,5 @@
-class Zfield:
 #Class for prime fields
+class Zfield:
 	def __init__(self, characteristic):
 		self.characteristic = characteristic
 
@@ -87,7 +87,7 @@ class Zelement:
 	def __rmul__(self, other):
 		return self * other
 		
-	def __truediv__(self, other):													#NB: STUPID!!!!  Making stupid operator first. Can exchange for euclids algortihm later
+	def __truediv__(self, other):													#Should implement euclids algortihm for this, later.
 		quot_value = 1
 		for i in range(self.getCharacteristic()):
 			if (other * i % self.getCharacteristic()) == self.value:
