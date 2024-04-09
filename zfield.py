@@ -56,6 +56,18 @@ class Zelement:
 		else:
 			return self.value >= other 
 
+	def __lt__(self, other):
+		if isinstance(other, Zelement):
+			return self.field != other.field or self.value != other.value
+		else:
+			return self.value < other
+		
+	def __le__(self, other):
+		if isinstance(other, Zelement):
+			return True
+		else:
+			return self.value <= other 
+
 	def __ne__(self, other):
 		if isinstance(other, Zelement):
 			return self.field != other.field or self.value != other.value
@@ -64,6 +76,9 @@ class Zelement:
 
 	def __mod__(self, other): #Helping operator so that can be used in later
 		return self.value % other
+
+	def __abs__(self):
+		return self
 		
 	def __add__(self, other):
 		sum_value = (other + self.value) % self.getCharacteristic()
