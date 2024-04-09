@@ -3,6 +3,9 @@ class Zfield:
 	def __init__(self, characteristic):
 		self.characteristic = characteristic
 
+	def canon(self, number):
+		return number % self.characteristic
+
 	def __iter__(self):
 		self.counter = 0
 		return self
@@ -29,7 +32,7 @@ class Zfield:
 #Class for the elements of such fields
 class Zelement:
 	def __init__(self, value, field):
-		self.value = value
+		self.value = field.canon(value)
 		self.field = field
 
 	def getCharacteristic(self):
