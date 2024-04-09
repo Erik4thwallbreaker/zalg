@@ -3,9 +3,9 @@ from unipolynomial import *
 from zfield import *
 
 F = Zfield(13)
-a = Zelement(1, F)
-b = Zelement(2, F)
-c = Zelement(3, F)
+a = Zelement(5, F)
+b = Zelement(10, F)
+c = Zelement(15, F)
 mytable = [a,b,c]
 mypol = Unipolynomial(aux=mytable)
-print(mypol)
+print(mypol * 1)
