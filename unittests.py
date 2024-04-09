@@ -2,6 +2,10 @@
 from unipolynomial import *
 from zfield import *
 
-# Doing some things
-MyArray = [[0 for i in range(3)] for i in range(3)]
-print(DumbArray)
+F = Zfield(13)
+a = Zelement(1, F)
+b = Zelement(2, F)
+c = Zelement(3, F)
+mytable = [a,b,c]
+mypol = Unipolynomial(aux=mytable)
+print(mypol)
