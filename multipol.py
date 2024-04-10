@@ -55,7 +55,7 @@ class Multipolynomial:
 				righthand = dict(other.terms)
 		else:
 			indeterms = self.indeterms
-			lefthand = self.terms
+			lefthand = dict(self.terms)
 			righthand = {tuple((0 for i in self.indeterms)): other}									#Constant term
 		for key, value in righthand.items():
 			for key, value in righthand.items():
