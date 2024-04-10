@@ -13,6 +13,15 @@ class Fcm:
 		self.counter += 1
 		return self.indices[self.counter - 1]
 
+	def __eq__(self, other):
+		return self.indices == other.indices
+
+	def __ne__(self, other):
+		return not(self == other)
+
+	def __hash__(self):
+		return hash(self.indices)
+
 	def __mul__( self, other):																		#Assumes the indices refer to the same indeterminates and therefore have equal length.
 		return tuple(( sum(i) for i in zip(self.indices, other.indices) ))
 
@@ -34,12 +43,37 @@ class Multipolynomial:
 			all_terms.append(single_term)
 		return ' + '.join(all_terms)
 
+	def __add__(self, other):																		#Addition by other polynomials or numbers?
+		if isinstance(other, Multipolynomial):
+			if self.indeterms == other.indeterms:
+				indeterms = self.indeterms
+				lefthand = dict(self.terms)
+				righthand = dict(other.terms)
+			else:								#TODO Fix reindexing here
+				indeterms = self.indeterms
+				lefthand = dict(self.terms)
+				righthand = dict(other.terms)
+		else:
+			indeterms = self.indeterms
+			lefthand = self.terms
+			righthand = {tuple((0 for i in self.indeterms)): other}									#Constant term
+		for key, value in righthand.items():
+			for key, value in righthand.items():
+				if key in lefthand:
+					lefthand[key] += righthand[key]
+				else:
+					lefthand[key] = righthand[key]
+		return Multipolynomial(lefthand, indeterms)
 
 
 
 
-
-mydict = {Fcm((2,0)):1, Fcm((1,1)):2, Fcm((0,2)):1}
+coefs1 = {Fcm((2,0)):1, Fcm((1,1)):2, Fcm((0,2)):1}
+coefs2 = {Fcm((2,0)):4}
 mychars = ('x','y')
-mypol = Multipolynomial(mydict, mychars)
-print(mypol)
+pol1 = Multipolynomial(coefs1 , mychars)
+pol2 = Multipolynomial(coefs2 , mychars)
+pol3 = pol1 + pol2
+print(pol1)
+print(pol2)
+print(pol3)
