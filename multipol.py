@@ -1,8 +1,8 @@
 #Free commutative monoid: A class with just enough structure to allow free polynomial ring mulitlpication.
 class Fcm:																
-	def __init__( self, indices = (), indeterms = () ):
-		self.indices = indices																		#The order with respect to each indeterminate.
-		self.indeterms = indeterms																	#Can be strings, or more esoteric ring objects. MUST BE EQUAL LENGTH.
+	def __init__( self, indices = (), indeterms = () ):												#TODO ?Should the tuples always be reduced to avoid duplicates, or be standardised?
+		self.indices = indices																		#Int - the order with respect to each indeterminate.
+		self.indeterms = indeterms																	#Can be strings, or more esoteric ring objects. MUST BE EQUAL LENGTH. Assumed to all be distinct.
 
 	def __iter__(self):
 		self.counter = 0
@@ -15,13 +15,13 @@ class Fcm:
 		return self.indices[self.counter - 1]
 
 	def __eq__(self, other):
-		return self.indices == other.indices
+		return dict(zip(self.indeterms, self.indices)) == dict(zip(other.indeterms, other.indices))	#TODO Should add a condition for 0 exponent or add a reduction.
 
 	def __ne__(self, other):
 		return not(self == other)
 
 	def __hash__(self):
-		return hash(self.indices)
+		return hash(frozenset(zip(self.indices, self.indeterms)))
 
 	def __mul__( self, other):																		#Assumes the indices refer to the same indeterminates and therefore have equal length.
 		return tuple(( sum(i) for i in zip(self.indices, other.indices) ))							#TODO Is outdated. Need fixing to work with different sequences of indetermiantes.
@@ -69,3 +69,4 @@ pol3 = pol1 + pol2
 print(pol1)
 print(pol2)
 print(pol3)
+print( Fcm((1,0),('x','y')) == Fcm((1,),('x',)) )
