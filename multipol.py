@@ -16,15 +16,8 @@ class Fcm:
 		self.indeterms = tuple(pro_dict.keys())														#Can be strings for formal multiplication or other ring objects.
 		self.indices = tuple(pro_dict.values())														#Int - the order with respect to each indeterminate.
 
-	def __iter__(self):																				#TODO Can it be made so that it cooperates with dict()?
-		self.counter = 0
-		return self
-
-	def __next__(self):
-		if self.counter >= len(self.indices):
-			raise StopIteration
-		self.counter += 1
-		return (self.indeterms[self.counter -1], self.indices[self.counter - 1])
+	def __iter__(self):																				
+		return iter(zip(self.indeterms, self.indices))
 
 	def __eq__(self, other):
 		return dict(zip(self.indeterms, self.indices)) == dict(zip(other.indeterms, other.indices))
