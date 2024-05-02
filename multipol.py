@@ -20,7 +20,7 @@ class Fcm:
 		return iter(zip(self.indeterms, self.indices))
 
 	def __eq__(self, other):
-		return dict(zip(self.indeterms, self.indices)) == dict(zip(other.indeterms, other.indices))
+		return dict(self) == dict(other)
 
 	def __ne__(self, other):
 		return not(self == other)
