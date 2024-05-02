@@ -29,10 +29,8 @@ class Fcm:
 		return hash(frozenset(zip(self.indices, self.indeterms)))
 
 	def __mul__( self, other):																		#Assumes the indices refer to the same indeterminates and therefore have equal length.
-		lefthand = dict(zip(self.indeterms, self.indices))
-		righthand = dict(zip(self.indeterms, self.indices))
-		pro_dict = Fcm.abela(lefthand, righthand)
-		return Fcm( indeterms = tuple(pro_dict.keys()), indices = tuple(pro_dict.values()) )
+		prod_dict = Fcm.abela(dict(self), dict(other))
+		return Fcm( indeterms = tuple(prod_dict.keys()), indices = tuple(prod_dict.values()) )		#TODO Make shoter and prettier
 
 	def __str__(self):																				#Has its own structure for the string expression of a single product/power.
 		all_factors = ['^'.join(i) for i in zip(map(str, self.indeterms), map(str, self.indices)) ]	#TODO Make nicer. With better list comprehension.
