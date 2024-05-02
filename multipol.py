@@ -1,13 +1,14 @@
 #Free commutative monoid: A class with just enough structure to allow free polynomial ring mulitlpication.
 class Fcm:																
 	@staticmethod																					#Abelian monoid operation. Adds indexes together without creating duplicates, (potentially zeroes)
-	def abela(lefthand, righthand):																	#TODO Fix so that it doesnt alter the lefthand input
+	def abela(lefthand, righthand):																	#Returns shallow copy of first argument. Mathematically correct.
+		prod = dict(lefthand)
 		for key,value in righthand.items():
-			if key in lefthand:
-				lefthand[key] += righthand[key]
+			if key in prod:
+				prod[key] += righthand[key]
 			else:
-				lefthand[key] = righthand[key]
-		return lefthand
+				prod[key] = righthand[key]
+		return prod
 
 
 	def __init__( self, indices = (), indeterms = () ):
