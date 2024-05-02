@@ -11,7 +11,7 @@ class Fcm:
 		return prod
 
 
-	def __init__( self, indices = (), indeterms = () ):
+	def __init__( self, indeterms = (), indices = () ):
 		pro_dict = {key: value for key, value in zip(indeterms, indices) if value != 0}
 		self.indeterms = tuple(pro_dict.keys())														#Can be strings for formal multiplication or other ring objects.
 		self.indices = tuple(pro_dict.values())														#Int - the order with respect to each indeterminate.
