@@ -10,11 +10,13 @@ class Fcm:
 				prod[key] = righthand[key]
 		return prod
 
-
-	def __init__( self, indeterms = (), indices = () ):
-		pro_dict = {key: value for key, value in zip(indeterms, indices) if value != 0}
-		self.indeterms = tuple(pro_dict.keys())														#Can be strings for formal multiplication or other ring objects.
-		self.indices = tuple(pro_dict.values())														#Int - the order with respect to each indeterminate.
+	def __init__( self, indeterms, indices = (0,)):
+		if not isinstance(indeterms, dict):
+			as_dict = {key: value for key, value in zip(indeterms, indices) if value != 0}
+		else:
+			as_dict = indeterms
+		self.indeterms = tuple(as_dict.keys())														#can be strings for formal multiplication or other ring objects.
+		self.indices = tuple(as_dict.values())														#Int - the order with respect to each indeterminate.
 
 	def __iter__(self):																				
 		return iter(zip(self.indeterms, self.indices))
@@ -29,8 +31,7 @@ class Fcm:
 		return hash(frozenset(zip(self.indices, self.indeterms)))
 
 	def __mul__( self, other):																		#Assumes the indices refer to the same indeterminates and therefore have equal length.
-		prod_dict = Fcm.abela(dict(self), dict(other))
-		return Fcm( indeterms = tuple(prod_dict.keys()), indices = tuple(prod_dict.values()) )		#TODO Make shoter and prettier
+		return Fcm(Fcm.abela(dict(self), dict(other)))
 
 	def __str__(self):																				#Has its own structure for the string expression of a single product/power.
 		all_factors = ['^'.join(i) for i in zip(map(str, self.indeterms), map(str, self.indices)) ]	#TODO Make nicer. With better list comprehension.
