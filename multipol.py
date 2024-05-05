@@ -42,25 +42,22 @@ class Fcm:
 #A class for computations in a polynomial algebra over any finite set of indeterminates.
 #Allows some freedom in choosing from which rings to draw both coeffecients and indeterminates.
 class Multipolynomial:
-	def __init__(self, terms={}):
-		self.terms = terms																			#Dictionary. The keys note indices (tuple-like). The values note coeffecients.
+	def __init__(self, expression = '', as_dict=None, indeterms=None, coeffs=None):										
+		if not as_dict is None:
+			self.terms = as_dict
+		elif not coeffs is None:
+			if not indeterms is None:
+				indeterms_list = list(indeterms)
+			else:
+				indeterms_list = [ Fcm(dict()) ]
+			coeffs_list = list(coeffs)	
+			self.terms = dict(zip(indeterms_list,coeffs_list))
+		elif False:																					#TODO Add string comprehension
+			self.terms = {0:0}
 
 	def __str__(self):
 		all_terms = [ str(value) + ' ' + str(key) for key, value in self.terms.items() ]
 		return ' + '.join(all_terms)
 
 	def __add__(self, other):																		#Addition by other polynomials or numbers?
-		if isinstance(other, Multipolynomial):
-			lefthand = dict(self.terms)
-			righthand = dict(other.terms)
-		else:																						#Adds numeric types as constant polynomials. TODO Adds string types through the string interpreter.
-			lefthand = dict(self.terms)
-			righthand = {Fcm(): other}															
-		for key, value in righthand.items():														#TODO Fix
-			for key, value in righthand.items():
-				if key in lefthand:
-					lefthand[key] += righthand[key]
-				else:
-					lefthand[key] = righthand[key]
-		return Multipolynomial(lefthand)
-
+		return Multipolynomial(as_dict = Fcm.abela(self.terms, other.terms))
