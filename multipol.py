@@ -69,5 +69,5 @@ class Multipolynomial:
 			righthand = Multipolynomial(indeterms=[other])
 		elif isinstance(other, int):
 			righthand = Multipolynomial(coeffs=[other])
-		prod_dict = Fcm.abela(self.terms, righthand.terms)
-		return Multipolynomial(as_dict = prod_dict)
+		sum_dict = Fcm.abela(self.terms, righthand.terms)
+		return Multipolynomial(as_dict = sum_dict)
