@@ -45,14 +45,17 @@ class Multipolynomial:
 	def __init__(self, expression = '', as_dict=None, indeterms=None, coeffs=None):										
 		if not as_dict is None:
 			self.terms = as_dict
-		elif not coeffs is None:
+		elif not indeterms is None or not coeffs is None:
 			if not indeterms is None:
 				indeterms_list = list(indeterms)
 			else:
 				indeterms_list = [ Fcm(dict()) ]
-			coeffs_list = list(coeffs)	
+			if not coeffs is None:
+				coeffs_list = list(coeffs)
+			else:
+				coeffs_list = [1]
 			self.terms = dict(zip(indeterms_list,coeffs_list))
-		elif False:																					#TODO Add string comprehension
+		else:																						#TODO Add string comprehension
 			self.terms = {0:0}
 
 	def __str__(self):
