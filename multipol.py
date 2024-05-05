@@ -43,9 +43,9 @@ class Fcm:
 #Allows some freedom in choosing from which rings to draw both coeffecients and indeterminates.
 class Multipolynomial:
 	def __init__(self, expression = '', as_dict=None, indeterms=None, coeffs=None):										
-		if not as_dict is None:
+		if as_dict is not None:
 			self.terms = as_dict
-		elif not indeterms is None or not coeffs is None:
+		elif indeterms is not None or coeffs is not None:
 			if not indeterms is None:
 				indeterms_list = list(indeterms)
 			else:
