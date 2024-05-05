@@ -34,7 +34,7 @@ class Fcm:
 		return Fcm(Fcm.abela(dict(self), dict(other)))
 
 	def __str__(self):																				#Has its own structure for the string expression of a single product/power.
-		all_factors = ['^'.join(i) for i in zip(map(str, self.indeterms), map(str, self.indices)) ]	#TODO Make nicer. With better list comprehension.
+		all_factors = [i + '^' + j for i,j in zip(map(str, self.indeterms), map(str, self.indices)) ]
 		return ' '.join(all_factors)
 
 
