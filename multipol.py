@@ -63,4 +63,12 @@ class Multipolynomial:
 		return ' + '.join(all_terms)
 
 	def __add__(self, other):																		#Addition by other polynomials or numbers?
-		return Multipolynomial(as_dict = Fcm.abela(self.terms, other.terms))
+		if isinstance(other, Multipolynomial):
+			prod_dict = Fcm.abela(self.terms, other.terms)
+		elif isinstance(other, Fcm):
+			righthand = Multipolynomial(indeterms=[other])
+			prod_dict = Fcm.abela(self.terms, righthand.terms)
+		elif isinstance(other, int):
+			righthand = Multipolynomial(coeffs=[other])
+			prod_dict = Fcm.abela(self.terms, righthand.terms)
+		return Multipolynomial(as_dict = prod_dict)
