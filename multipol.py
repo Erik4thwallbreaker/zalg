@@ -59,11 +59,11 @@ class Multipolynomial:
 			self.terms = {0:0}
 
 	def __iter__(self):
-		self.kit = iter(self.terms)																	#TODO Add a nice sorting for the iterator?
+		self.kit = iter(self.terms)																	#Could this be made nicer?
 		return self
 	
 	def __next__(self):
-		single_key = next(self.kit)	#TODO fix! find out how next(dictionary) works. Use self.terms.items()?
+		single_key = next(self.kit)
 		return Multipolynomial( indeterms=[single_key], coeffs=[self.terms[single_key]] )
 
 	def __str__(self):
