@@ -58,6 +58,14 @@ class Multipolynomial:
 		else:																						#TODO Add string comprehension
 			self.terms = {0:0}
 
+	def __iter__(self):
+		self.kit = iter(self.terms)																	#TODO Add a nice sorting for the iterator?
+		return self
+	
+	def __next__(self):
+		single_key = next(self.kit)	#TODO fix! find out how next(dictionary) works. Use self.terms.items()?
+		return Multipolynomial( indeterms=[single_key], coeffs=[self.terms[single_key]] )
+
 	def __str__(self):
 		all_terms = [ str(value) + ' ' + str(key) for key, value in self.terms.items() ]
 		return ' + '.join(all_terms)
